@@ -20,6 +20,6 @@ conditions.
 
 ---
 
-copyright (c) 2023 conplement AG<br> Content published under the Apache License
+copyright (c) 2024 conplement AG<br> Content published under the Apache License
 Version 2.0 or MIT license, are marked as such. They may be used in accordance
 with the stated license conditions.
