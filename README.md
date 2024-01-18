@@ -4,6 +4,10 @@ Product page: https://www.omnect.io/home
 This repository provides bindings for the dbus interface of
 [ModemManager](https://www.freedesktop.org/wiki/Software/ModemManager/).<br>
 
+**Note**: this crate relies on the
+ [modemmanager-sys](https://github.com/omnect/modemmanager-sys) for ModemManager
+ types. crate.
+
 # License
 
 Licensed under either of
