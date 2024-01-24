@@ -115,14 +115,6 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             MMBearerAllowedAuth::from_u32(allowed_auth).ok_or(zbus::Error::InvalidField)?;
         let user: &str = values.get("user")?.ok_or(zbus::Error::InvalidField)?;
         let password: &str = values.get("password")?.ok_or(zbus::Error::InvalidField)?;
-        let access_type_preference: u32 = values
-            .get("access-type-preference")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
-        let roaming_allowance: u32 = values
-            .get("roaming-allowance")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
         let profile_id: &str = values.get("profile-id")?.ok_or(zbus::Error::InvalidField)?;
         let profile_name: &str = values
             .get("profile-name")?
