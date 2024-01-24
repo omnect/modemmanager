@@ -6,12 +6,14 @@ use std::{
 };
 
 use modemmanager_sys::{
-    MMBearerAllowedAuth, MMBearerApnType, MMBearerIpFamily,
-    MMBearerIpMethod, MMBearerMultiplexSupport, MMBearerType, MMModemCdmaRmProtocol,
+    MMBearerAllowedAuth, MMBearerApnType, MMBearerIpFamily, MMBearerIpMethod,
+    MMBearerMultiplexSupport, MMBearerType, MMModemCdmaRmProtocol,
 };
 
 #[cfg(feature = "ModemManager-1_22")]
-use modemmanager_sys::{MMBearerAccessTypePreference, MMBearerProfileSource, MMBearerRoamingAllowance};
+use modemmanager_sys::{
+    MMBearerAccessTypePreference, MMBearerProfileSource, MMBearerRoamingAllowance,
+};
 
 use zbus::dbus_proxy;
 use zbus::zvariant::{Dict, OwnedValue};
