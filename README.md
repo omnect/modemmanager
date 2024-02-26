@@ -5,8 +5,8 @@ This repository provides bindings for the dbus interface of
 [ModemManager](https://www.freedesktop.org/wiki/Software/ModemManager/).<br>
 
 **Note**: this crate relies on the
- [modemmanager-sys](https://github.com/omnect/modemmanager-sys) for ModemManager
- types. crate.
+ [modemmanager-sys](https://github.com/omnect/modemmanager-sys) crate for ModemManager
+ types. The crate provides the used types as re-exports.
 
 # License
 
