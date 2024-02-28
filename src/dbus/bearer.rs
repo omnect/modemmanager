@@ -10,7 +10,7 @@ use modemmanager_sys::{
     MMBearerMultiplexSupport, MMBearerType, MMModemCdmaRmProtocol,
 };
 
-#[cfg(feature = "ModemManager-1_22")]
+#[cfg(feature = "ModemManager-1_20")]
 use modemmanager_sys::{
     MMBearerAccessTypePreference, MMBearerProfileSource, MMBearerRoamingAllowance,
 };
@@ -61,7 +61,7 @@ impl TryFrom<OwnedValue> for Stats {
     }
 }
 
-#[cfg(not(feature = "ModemManager-1_22"))]
+#[cfg(not(feature = "ModemManager-1_20"))]
 pub struct Prop3Gpp {
     pub apn: String,
     pub ip_type: MMBearerIpFamily,
@@ -76,7 +76,7 @@ pub struct Prop3Gpp {
     pub multiplex: MMBearerMultiplexSupport,
 }
 
-#[cfg(feature = "ModemManager-1_22")]
+#[cfg(feature = "ModemManager-1_20")]
 pub struct Prop3Gpp {
     pub apn: String,
     pub ip_type: MMBearerIpFamily,
@@ -96,7 +96,7 @@ pub struct Prop3Gpp {
 
 impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
     type Error = zbus::Error;
-    #[cfg(not(feature = "ModemManager-1_22"))]
+    #[cfg(not(feature = "ModemManager-1_20"))]
     fn try_from(values: Dict) -> Result<Self, Self::Error> {
         let apn: &str = values.get("apn")?.ok_or(zbus::Error::InvalidField)?;
         let ip_type: u32 = values
@@ -149,7 +149,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
         })
     }
 
-    #[cfg(feature = "ModemManager-1_22")]
+    #[cfg(feature = "ModemManager-1_20")]
     fn try_from(values: Dict) -> Result<Self, Self::Error> {
         let apn: &str = values.get("apn")?.ok_or(zbus::Error::InvalidField)?;
         let ip_type: u32 = values
