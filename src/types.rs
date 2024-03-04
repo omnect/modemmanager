@@ -10,9 +10,6 @@ pub use modemmanager_sys::{
     MMBearerAllowedAuth as BearerAllowedAuth, MMBearerApnType as BearerApnType,
     MMBearerIpFamily as BearerIpFamily, MMBearerIpMethod as BearerIpMethod,
     MMBearerMultiplexSupport as BearerMultiplexSupport, MMBearerType as BearerType,
-};
-
-pub use modemmanager_sys::{
     MMModemAccessTechnology as ModemAccessTechnology, MMModemBand as ModemBand,
     MMModemCapability as ModemCapability, MMModemCdmaRmProtocol as ModemCdmaRmProtocol,
     MMModemLock as ModemLock, MMModemMode as ModemMode, MMModemPortType as ModemPortType,
