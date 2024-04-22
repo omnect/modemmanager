@@ -105,7 +105,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             .ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
         let apn_type: u32 = values
-            .get("apn_type")?
+            .get("apn-type")?
             .cloned()
             .ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
@@ -158,7 +158,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             .ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
         let apn_type: u32 = values
-            .get("apn_type")?
+            .get("apn-type")?
             .cloned()
             .ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
