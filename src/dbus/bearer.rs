@@ -341,6 +341,10 @@ impl<AddrType: FromStr> TryFrom<OwnedValue> for IpConfig<AddrType> {
     }
 }
 
+pub type Ipv4Config = IpConfig<Ipv4Addr>;
+
+pub type Ipv6Config = IpConfig<Ipv6Addr>;
+
 #[dbus_proxy(
     interface = "org.freedesktop.ModemManager1.Bearer",
     assume_defaults = true
