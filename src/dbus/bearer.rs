@@ -374,11 +374,15 @@ trait Bearer {
 
     /// Ip4Config property
     #[dbus_proxy(property)]
-    fn ip4_config(&self) -> zbus::Result<IpConfig<Ipv4Addr>>;
+    fn ip4_config(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Ip6Config property
     #[dbus_proxy(property)]
-    fn ip6_config(&self) -> zbus::Result<IpConfig<Ipv6Addr>>;
+    fn ip6_config(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// IpTimeout property
     #[dbus_proxy(property)]
@@ -394,7 +398,9 @@ trait Bearer {
 
     /// Properties property
     #[dbus_proxy(property)]
-    fn properties(&self) -> zbus::Result<Properties>;
+    fn properties(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// ReloadStatsSupported property
     #[dbus_proxy(property)]
@@ -402,7 +408,7 @@ trait Bearer {
 
     /// Stats property
     #[dbus_proxy(property)]
-    fn stats(&self) -> zbus::Result<Stats>;
+    fn stats(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Suspended property
     #[dbus_proxy(property)]
