@@ -105,7 +105,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             .ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
         let apn_type: u32 = values
-            .get("apn_type")?
+            .get("apn-type")?
             .cloned()
             .ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
@@ -158,7 +158,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             .ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
         let apn_type: u32 = values
-            .get("apn_type")?
+            .get("apn-type")?
             .cloned()
             .ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
@@ -341,6 +341,10 @@ impl<AddrType: FromStr> TryFrom<OwnedValue> for IpConfig<AddrType> {
     }
 }
 
+pub type Ipv4Config = IpConfig<Ipv4Addr>;
+
+pub type Ipv6Config = IpConfig<Ipv6Addr>;
+
 #[dbus_proxy(
     interface = "org.freedesktop.ModemManager1.Bearer",
     assume_defaults = true
@@ -370,11 +374,15 @@ trait Bearer {
 
     /// Ip4Config property
     #[dbus_proxy(property)]
-    fn ip4_config(&self) -> zbus::Result<IpConfig<Ipv4Addr>>;
+    fn ip4_config(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Ip6Config property
     #[dbus_proxy(property)]
-    fn ip6_config(&self) -> zbus::Result<IpConfig<Ipv6Addr>>;
+    fn ip6_config(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// IpTimeout property
     #[dbus_proxy(property)]
@@ -390,7 +398,9 @@ trait Bearer {
 
     /// Properties property
     #[dbus_proxy(property)]
-    fn properties(&self) -> zbus::Result<Properties>;
+    fn properties(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// ReloadStatsSupported property
     #[dbus_proxy(property)]
@@ -398,7 +408,7 @@ trait Bearer {
 
     /// Stats property
     #[dbus_proxy(property)]
-    fn stats(&self) -> zbus::Result<Stats>;
+    fn stats(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Suspended property
     #[dbus_proxy(property)]
