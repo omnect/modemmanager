@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Call`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Call",
     assume_defaults = true
 )]
@@ -29,40 +29,40 @@ trait Call {
     fn start(&self) -> zbus::Result<()>;
 
     /// DtmfReceived signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn dtmf_received(&self, dtmf: &str) -> zbus::Result<()>;
 
     /// StateChanged signal
-    #[dbus_proxy(signal, name = "state_changed")]
+    #[zbus(signal, name = "state_changed")]
     fn state_changed_func(&self, old: i32, new: i32, reason: u32) -> zbus::Result<()>;
 
     /// AudioFormat property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn audio_format(
         &self,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// AudioPort property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn audio_port(&self) -> zbus::Result<String>;
 
     /// Direction property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn direction(&self) -> zbus::Result<i32>;
 
     /// Multiparty property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn multiparty(&self) -> zbus::Result<bool>;
 
     /// Number property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn number(&self) -> zbus::Result<String>;
 
     /// State property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn state(&self) -> zbus::Result<i32>;
 
     /// StateReason property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn state_reason(&self) -> zbus::Result<i32>;
 }

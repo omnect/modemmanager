@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Sar`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Sar",
     assume_defaults = true
 )]
@@ -14,10 +14,10 @@ trait Sar {
     fn set_power_level(&self, level: u32) -> zbus::Result<()>;
 
     /// PowerLevel property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn power_level(&self) -> zbus::Result<u32>;
 
     /// State property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn state(&self) -> zbus::Result<bool>;
 }

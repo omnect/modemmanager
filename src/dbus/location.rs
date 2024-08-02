@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Location`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Location",
     assume_defaults = true
 )]
@@ -25,34 +25,34 @@ trait Location {
     fn setup(&self, sources: u32, signal_location: bool) -> zbus::Result<()>;
 
     /// AssistanceDataServers property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn assistance_data_servers(&self) -> zbus::Result<Vec<String>>;
 
     /// Capabilities property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn capabilities(&self) -> zbus::Result<u32>;
 
     /// Enabled property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn enabled(&self) -> zbus::Result<u32>;
 
     /// GpsRefreshRate property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn gps_refresh_rate(&self) -> zbus::Result<u32>;
 
     /// Location property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn location(&self) -> zbus::Result<std::collections::HashMap<u32, zbus::zvariant::OwnedValue>>;
 
     /// SignalsLocation property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn signals_location(&self) -> zbus::Result<bool>;
 
     /// SuplServer property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn supl_server(&self) -> zbus::Result<String>;
 
     /// SupportedAssistanceData property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn supported_assistance_data(&self) -> zbus::Result<u32>;
 }

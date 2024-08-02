@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Simple`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Simple",
     assume_defaults = true
 )]
