@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Voice`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Voice",
     assume_defaults = true
 )]
@@ -38,18 +38,18 @@ trait Voice {
     fn transfer(&self) -> zbus::Result<()>;
 
     /// CallAdded signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn call_added(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// CallDeleted signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn call_deleted(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// Calls property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn calls(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
 
     /// EmergencyOnly property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn emergency_only(&self) -> zbus::Result<bool>;
 }

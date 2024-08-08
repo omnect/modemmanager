@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(interface = "org.freedesktop.ModemManager1", assume_defaults = true)]
+#[proxy(interface = "org.freedesktop.ModemManager1", assume_defaults = true)]
 trait ModemManager1 {
     /// InhibitDevice method
     fn inhibit_device(&self, uid: &str, inhibit: bool) -> zbus::Result<()>;
@@ -20,6 +20,6 @@ trait ModemManager1 {
     fn set_logging(&self, level: &str) -> zbus::Result<()>;
 
     /// Version property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn version(&self) -> zbus::Result<String>;
 }

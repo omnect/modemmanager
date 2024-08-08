@@ -6,14 +6,14 @@ license = "MIT OR Apache-2.0"
 name = "modemmanager"
 readme = "README.md"
 repository = "git@github.com:omnect/modemmanager.git"
-version = "0.3.1"
+version = "0.3.2"
 
 [dependencies]
-num = "0.4.1"
-num-derive = "0.4.1"
-num-traits = "0.2.17"
-zbus = "3.14"
-modemmanager-sys = { git = "https://github.com/omnect/modemmanager-sys.git", features = ["zbus"], tag = "0.1.2" }
+num = "0.4"
+num-derive = "0.4"
+num-traits = "0.2"
+zbus = "4.4"
+modemmanager-sys = { git = "https://github.com/omnect/modemmanager-sys.git", features = ["zbus"], tag = "0.1.3" }
 
 [features]
 ModemManager-1_20 = []

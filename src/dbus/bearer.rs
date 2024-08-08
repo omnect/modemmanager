@@ -15,7 +15,7 @@ use modemmanager_sys::{
     MMBearerAccessTypePreference, MMBearerProfileSource, MMBearerRoamingAllowance,
 };
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 use zbus::zvariant::{Dict, OwnedValue};
 
 use num::FromPrimitive;
@@ -39,14 +39,14 @@ impl TryFrom<OwnedValue> for Stats {
     fn try_from(value: OwnedValue) -> Result<Self, Self::Error> {
         let values_dict: Dict<'_, '_> = value.try_into()?;
 
-        let rx_bytes = values_dict.get("rx-bytes")?.cloned();
-        let tx_bytes = values_dict.get("tx-bytes")?.cloned();
-        let duration = values_dict.get("duration")?.cloned();
-        let attempts = values_dict.get("attempts")?.cloned();
-        let failed_attempts = values_dict.get("failed-attempts")?.cloned();
-        let total_rx_bytes = values_dict.get("total-rx-bytes")?.cloned();
-        let total_tx_bytes = values_dict.get("total-tx-bytes")?.cloned();
-        let total_duration = values_dict.get("total-duration")?.cloned();
+        let rx_bytes = values_dict.get(&"rx-bytes")?;
+        let tx_bytes = values_dict.get(&"tx-bytes")?;
+        let duration = values_dict.get(&"duration")?;
+        let attempts = values_dict.get(&"attempts")?;
+        let failed_attempts = values_dict.get(&"failed-attempts")?;
+        let total_rx_bytes = values_dict.get(&"total-rx-bytes")?;
+        let total_tx_bytes = values_dict.get(&"total-tx-bytes")?;
+        let total_duration = values_dict.get(&"total-duration")?;
 
         Ok(Stats {
             rx_bytes,
@@ -151,57 +151,46 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
 
     #[cfg(feature = "ModemManager-1_20")]
     fn try_from(values: Dict) -> Result<Self, Self::Error> {
-        let apn: &str = values.get("apn")?.ok_or(zbus::Error::InvalidField)?;
-        let ip_type: u32 = values
-            .get("ip-type")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let apn: &str = values.get(&"apn")?.ok_or(zbus::Error::InvalidField)?;
+        let ip_type: u32 = values.get(&"ip-type")?.ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
-        let apn_type: u32 = values
-            .get("apn-type")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let apn_type: u32 = values.get(&"apn-type")?.ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
         let allowed_auth: u32 = values
-            .get("allowed-auth")?
-            .cloned()
+            .get(&"allowed-auth")?
             .ok_or(zbus::Error::InvalidField)?;
         let allowed_auth =
             MMBearerAllowedAuth::from_u32(allowed_auth).ok_or(zbus::Error::InvalidField)?;
-        let user: &str = values.get("user")?.ok_or(zbus::Error::InvalidField)?;
-        let password: &str = values.get("password")?.ok_or(zbus::Error::InvalidField)?;
+        let user: &str = values.get(&"user")?.ok_or(zbus::Error::InvalidField)?;
+        let password: &str = values.get(&"password")?.ok_or(zbus::Error::InvalidField)?;
         let access_type_preference: u32 = values
-            .get("access-type-preference")?
-            .cloned()
+            .get(&"access-type-preference")?
             .ok_or(zbus::Error::InvalidField)?;
         let access_type_preference = MMBearerAccessTypePreference::from_u32(access_type_preference)
             .ok_or(zbus::Error::InvalidField)?;
         let roaming_allowance: u32 = values
-            .get("roaming-allowance")?
-            .cloned()
+            .get(&"roaming-allowance")?
             .ok_or(zbus::Error::InvalidField)?;
         let roaming_allowance = MMBearerRoamingAllowance::from_u32(roaming_allowance)
             .ok_or(zbus::Error::InvalidField)?;
-        let profile_id: &str = values.get("profile-id")?.ok_or(zbus::Error::InvalidField)?;
-        let profile_name: &str = values
-            .get("profile-name")?
+        let profile_id: &str = values
+            .get(&"profile-id")?
             .ok_or(zbus::Error::InvalidField)?;
-        let profile_enabled: bool = *values
-            .get("profile-enabled")?
+        let profile_name: &str = values
+            .get(&"profile-name")?
+            .ok_or(zbus::Error::InvalidField)?;
+        let profile_enabled: bool = values
+            .get::<&str, bool>(&"profile-enabled")?
             .ok_or(zbus::Error::InvalidField)?;
         let profile_source: u32 = values
-            .get("profile-source")?
-            .cloned()
+            .get(&"profile-source")?
             .ok_or(zbus::Error::InvalidField)?;
         let profile_source =
             MMBearerProfileSource::from_u32(profile_source).ok_or(zbus::Error::InvalidField)?;
-        let allow_roaming: bool = *values
-            .get("allow-roaming")?
+        let allow_roaming: bool = values
+            .get::<&str, bool>(&"allow-roaming")?
             .ok_or(zbus::Error::InvalidField)?;
-        let multiplex: u32 = values
-            .get("multiplex")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let multiplex: u32 = values.get(&"multiplex")?.ok_or(zbus::Error::InvalidField)?;
         let multiplex =
             MMBearerMultiplexSupport::from_u32(multiplex).ok_or(zbus::Error::InvalidField)?;
 
@@ -235,21 +224,16 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp2 {
 
     fn try_from(values: Dict) -> Result<Self, Self::Error> {
         let rm_protocol: u32 = values
-            .get("rm-protocol")?
-            .cloned()
+            .get(&"rm-protocol")?
             .ok_or(zbus::Error::InvalidField)?;
         let rm_protocol =
             MMModemCdmaRmProtocol::from_u32(rm_protocol).ok_or(zbus::Error::InvalidField)?;
 
         let allow_roaming: bool = values
-            .get("allow-roaming")?
-            .cloned()
+            .get(&"allow-roaming")?
             .ok_or(zbus::Error::InvalidField)?;
 
-        let multiplex: u32 = values
-            .get("multiplex")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let multiplex: u32 = values.get(&"multiplex")?.ok_or(zbus::Error::InvalidField)?;
         let multiplex =
             MMBearerMultiplexSupport::from_u32(multiplex).ok_or(zbus::Error::InvalidField)?;
 
@@ -272,7 +256,7 @@ impl TryFrom<OwnedValue> for Properties {
     fn try_from(value: OwnedValue) -> Result<Self, Self::Error> {
         let values_dict: Dict = value.try_into()?;
 
-        let apn: Result<Option<&str>, _> = values_dict.get("apn");
+        let apn: Result<Option<&str>, _> = values_dict.get(&"apn");
 
         if let Ok(Some(_)) = apn {
             return Ok(Properties::Prop3Gpp(values_dict.try_into()?));
@@ -301,32 +285,31 @@ impl<AddrType: FromStr> TryFrom<OwnedValue> for IpConfig<AddrType> {
         let values_dict: Dict<'_, '_> = value.try_into()?;
 
         let method: u32 = values_dict
-            .get("method")?
-            .cloned()
+            .get(&"method")?
             .ok_or(zbus::Error::InvalidField)?;
         let method = MMBearerIpMethod::from_u32(method).ok_or(zbus::Error::InvalidField)?;
         let address = values_dict
-            .get("address")?
+            .get(&"address")?
             .map(|addr| AddrType::from_str(addr).or(Err(zbus::Error::InvalidField)))
             .transpose()?;
-        let prefix = values_dict.get("prefix")?.cloned();
+        let prefix = values_dict.get(&"prefix")?;
         let dns1 = values_dict
-            .get("dns1")?
+            .get(&"dns1")?
             .map(|addr| AddrType::from_str(addr).or(Err(zbus::Error::InvalidField)))
             .transpose()?;
         let dns2 = values_dict
-            .get("dns2")?
+            .get(&"dns2")?
             .map(|addr| AddrType::from_str(addr).or(Err(zbus::Error::InvalidField)))
             .transpose()?;
         let dns3 = values_dict
-            .get("dns3")?
+            .get(&"dns3")?
             .map(|addr| AddrType::from_str(addr).or(Err(zbus::Error::InvalidField)))
             .transpose()?;
         let gateway = values_dict
-            .get("gateway")?
+            .get(&"gateway")?
             .map(|addr| AddrType::from_str(addr).or(Err(zbus::Error::InvalidField)))
             .transpose()?;
-        let mtu = values_dict.get("mtu")?.cloned();
+        let mtu = values_dict.get(&"mtu")?;
 
         Ok(IpConfig::<AddrType> {
             method,
@@ -345,7 +328,7 @@ pub type Ipv4Config = IpConfig<Ipv4Addr>;
 
 pub type Ipv6Config = IpConfig<Ipv6Addr>;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Bearer",
     assume_defaults = true
 )]
@@ -357,60 +340,60 @@ trait Bearer {
     fn disconnect(&self) -> zbus::Result<()>;
 
     /// BearerType property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn bearer_type(&self) -> zbus::Result<MMBearerType>;
 
     /// Connected property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn connected(&self) -> zbus::Result<bool>;
 
     /// ConnectionError property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn connection_error(&self) -> zbus::Result<(String, String)>;
 
     /// Interface property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn interface(&self) -> zbus::Result<String>;
 
     /// Ip4Config property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn ip4_config(
         &self,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Ip6Config property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn ip6_config(
         &self,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// IpTimeout property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn ip_timeout(&self) -> zbus::Result<u32>;
 
     /// Multiplexed property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn multiplexed(&self) -> zbus::Result<bool>;
 
     /// ProfileId property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn profile_id(&self) -> zbus::Result<i32>;
 
     /// Properties property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn properties(
         &self,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// ReloadStatsSupported property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn reload_stats_supported(&self) -> zbus::Result<bool>;
 
     /// Stats property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn stats(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Suspended property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn suspended(&self) -> zbus::Result<bool>;
 }

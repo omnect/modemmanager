@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Firmware`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Firmware",
     assume_defaults = true
 )]
@@ -19,7 +19,7 @@ trait Firmware {
     fn select(&self, uniqueid: &str) -> zbus::Result<()>;
 
     /// UpdateSettings property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn update_settings(
         &self,
     ) -> zbus::Result<(

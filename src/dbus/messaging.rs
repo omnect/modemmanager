@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Messaging`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Messaging",
     assume_defaults = true
 )]
@@ -20,22 +20,22 @@ trait Messaging {
     fn list(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
 
     /// Added signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn added(&self, path: zbus::zvariant::ObjectPath<'_>, received: bool) -> zbus::Result<()>;
 
     /// Deleted signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn deleted(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// DefaultStorage property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn default_storage(&self) -> zbus::Result<u32>;
 
     /// Messages property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn messages(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
 
     /// SupportedStorages property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn supported_storages(&self) -> zbus::Result<Vec<u32>>;
 }

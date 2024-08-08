@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.ModemCdma`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.ModemCdma",
     assume_defaults = true
 )]
@@ -17,7 +17,7 @@ trait ModemCdma {
     ) -> zbus::Result<()>;
 
     /// ActivationStateChanged signal
-    #[dbus_proxy(signal, name = "activation_state_changed")]
+    #[zbus(signal, name = "activation_state_changed")]
     fn activation_state_changed_func(
         &self,
         activation_state: u32,
@@ -26,30 +26,30 @@ trait ModemCdma {
     ) -> zbus::Result<()>;
 
     /// ActivationState property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn activation_state(&self) -> zbus::Result<u32>;
 
     /// Cdma1xRegistrationState property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn cdma1x_registration_state(&self) -> zbus::Result<u32>;
 
     /// Esn property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn esn(&self) -> zbus::Result<String>;
 
     /// EvdoRegistrationState property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn evdo_registration_state(&self) -> zbus::Result<u32>;
 
     /// Meid property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn meid(&self) -> zbus::Result<String>;
 
     /// Nid property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn nid(&self) -> zbus::Result<u32>;
 
     /// Sid property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn sid(&self) -> zbus::Result<u32>;
 }

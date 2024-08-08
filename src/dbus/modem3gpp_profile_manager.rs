@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Modem3gpp.ProfileManager`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Modem3gpp.ProfileManager",
     assume_defaults = true
 )]
@@ -25,10 +25,10 @@ trait ProfileManager {
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// Updated signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn updated(&self) -> zbus::Result<()>;
 
     /// IndexField property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn index_field(&self) -> zbus::Result<String>;
 }

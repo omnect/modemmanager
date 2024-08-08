@@ -1,8 +1,8 @@
 //! # DBus interface proxy for: `org.freedesktop.ModemManager1.Modem.Time`
 
-use zbus::dbus_proxy;
+use zbus::proxy;
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.ModemManager1.Modem.Time",
     assume_defaults = true
 )]
@@ -11,11 +11,11 @@ trait Time {
     fn get_network_time(&self) -> zbus::Result<String>;
 
     /// NetworkTimeChanged signal
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn network_time_changed(&self, time: &str) -> zbus::Result<()>;
 
     /// NetworkTimezone property
-    #[dbus_proxy(property)]
+    #[zbus(property)]
     fn network_timezone(
         &self,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
