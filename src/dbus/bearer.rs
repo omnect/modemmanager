@@ -98,39 +98,31 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
     type Error = zbus::Error;
     #[cfg(not(feature = "ModemManager-1_20"))]
     fn try_from(values: Dict) -> Result<Self, Self::Error> {
-        let apn: &str = values.get("apn")?.ok_or(zbus::Error::InvalidField)?;
-        let ip_type: u32 = values
-            .get("ip-type")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let apn: &str = values.get(&"apn")?.ok_or(zbus::Error::InvalidField)?;
+        let ip_type: u32 = values.get(&"ip-type")?.ok_or(zbus::Error::InvalidField)?;
         let ip_type = MMBearerIpFamily::from_u32(ip_type).ok_or(zbus::Error::InvalidField)?;
-        let apn_type: u32 = values
-            .get("apn-type")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let apn_type: u32 = values.get(&"apn-type")?.ok_or(zbus::Error::InvalidField)?;
         let apn_type = MMBearerApnType::from_u32(apn_type).ok_or(zbus::Error::InvalidField)?;
         let allowed_auth: u32 = values
-            .get("allowed-auth")?
-            .cloned()
+            .get(&"allowed-auth")?
             .ok_or(zbus::Error::InvalidField)?;
         let allowed_auth =
             MMBearerAllowedAuth::from_u32(allowed_auth).ok_or(zbus::Error::InvalidField)?;
-        let user: &str = values.get("user")?.ok_or(zbus::Error::InvalidField)?;
-        let password: &str = values.get("password")?.ok_or(zbus::Error::InvalidField)?;
-        let profile_id: &str = values.get("profile-id")?.ok_or(zbus::Error::InvalidField)?;
+        let user: &str = values.get(&"user")?.ok_or(zbus::Error::InvalidField)?;
+        let password: &str = values.get(&"password")?.ok_or(zbus::Error::InvalidField)?;
+        let profile_id: &str = values
+            .get(&"profile-id")?
+            .ok_or(zbus::Error::InvalidField)?;
         let profile_name: &str = values
-            .get("profile-name")?
+            .get(&"profile-name")?
             .ok_or(zbus::Error::InvalidField)?;
-        let profile_enabled: bool = *values
-            .get("profile-enabled")?
+        let profile_enabled: bool = values
+            .get(&"profile-enabled")?
             .ok_or(zbus::Error::InvalidField)?;
-        let allow_roaming: bool = *values
-            .get("allow-roaming")?
+        let allow_roaming: bool = values
+            .get(&"allow-roaming")?
             .ok_or(zbus::Error::InvalidField)?;
-        let multiplex: u32 = values
-            .get("multiplex")?
-            .cloned()
-            .ok_or(zbus::Error::InvalidField)?;
+        let multiplex: u32 = values.get(&"multiplex")?.ok_or(zbus::Error::InvalidField)?;
         let multiplex =
             MMBearerMultiplexSupport::from_u32(multiplex).ok_or(zbus::Error::InvalidField)?;
 
@@ -180,7 +172,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
             .get(&"profile-name")?
             .ok_or(zbus::Error::InvalidField)?;
         let profile_enabled: bool = values
-            .get::<&str, bool>(&"profile-enabled")?
+            .get(&"profile-enabled")?
             .ok_or(zbus::Error::InvalidField)?;
         let profile_source: u32 = values
             .get(&"profile-source")?
@@ -188,7 +180,7 @@ impl TryFrom<Dict<'_, '_>> for Prop3Gpp {
         let profile_source =
             MMBearerProfileSource::from_u32(profile_source).ok_or(zbus::Error::InvalidField)?;
         let allow_roaming: bool = values
-            .get::<&str, bool>(&"allow-roaming")?
+            .get(&"allow-roaming")?
             .ok_or(zbus::Error::InvalidField)?;
         let multiplex: u32 = values.get(&"multiplex")?.ok_or(zbus::Error::InvalidField)?;
         let multiplex =
