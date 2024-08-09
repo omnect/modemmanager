@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 name = "modemmanager"
 readme = "README.md"
 repository = "git@github.com:omnect/modemmanager.git"
-version = "0.3.2"
+version = "0.3.3"
 
 [dependencies]
 num = "0.4"
