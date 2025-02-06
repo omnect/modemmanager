@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Firmware",
     assume_defaults = true
 )]
-trait Firmware {
+pub trait Firmware {
     /// List method
     fn list(
         &self,

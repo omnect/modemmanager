@@ -12,7 +12,7 @@ use modemmanager_sys::{
     interface = "org.freedesktop.ModemManager1.Modem",
     assume_defaults = true
 )]
-trait Modem {
+pub trait Modem {
     /// Command method
     fn command(&self, cmd: &str, timeout: u32) -> zbus::Result<String>;
 

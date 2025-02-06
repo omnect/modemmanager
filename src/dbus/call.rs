@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Call",
     assume_defaults = true
 )]
-trait Call {
+pub trait Call {
     /// Accept method
     fn accept(&self) -> zbus::Result<()>;
 

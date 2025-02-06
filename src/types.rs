@@ -1,5 +1,4 @@
 /// Provide reexports of modem manager types.
-
 #[cfg(feature = "ModemManager-1_20")]
 pub use modemmanager_sys::{
     MMBearerAccessTypePreference as BearerAccessTypePreference,

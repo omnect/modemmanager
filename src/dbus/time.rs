@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Time",
     assume_defaults = true
 )]
-trait Time {
+pub trait Time {
     /// GetNetworkTime method
     fn get_network_time(&self) -> zbus::Result<String>;
 

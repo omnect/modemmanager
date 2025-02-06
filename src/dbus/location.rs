@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Location",
     assume_defaults = true
 )]
-trait Location {
+pub trait Location {
     /// GetLocation method
     fn get_location(
         &self,

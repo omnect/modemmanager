@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Sms",
     assume_defaults = true
 )]
-trait Sms {
+pub trait Sms {
     /// Send method
     fn send(&self) -> zbus::Result<()>;
 

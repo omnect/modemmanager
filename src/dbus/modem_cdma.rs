@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.ModemCdma",
     assume_defaults = true
 )]
-trait ModemCdma {
+pub trait ModemCdma {
     /// Activate method
     fn activate(&self, carrier_code: &str) -> zbus::Result<()>;
 

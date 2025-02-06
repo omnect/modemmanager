@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Signal",
     assume_defaults = true
 )]
-trait Signal {
+pub trait Signal {
     /// Setup method
     fn setup(&self, rate: u32) -> zbus::Result<()>;
 

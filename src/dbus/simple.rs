@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Simple",
     assume_defaults = true
 )]
-trait Simple {
+pub trait Simple {
     /// Connect method
     fn connect(
         &self,

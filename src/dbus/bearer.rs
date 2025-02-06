@@ -324,7 +324,7 @@ pub type Ipv6Config = IpConfig<Ipv6Addr>;
     interface = "org.freedesktop.ModemManager1.Bearer",
     assume_defaults = true
 )]
-trait Bearer {
+pub  trait Bearer {
     /// Connect method
     fn connect(&self) -> zbus::Result<()>;
 

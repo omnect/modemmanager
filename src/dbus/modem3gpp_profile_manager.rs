@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Modem3gpp.ProfileManager",
     assume_defaults = true
 )]
-trait ProfileManager {
+pub trait ProfileManager {
     /// Delete method
     fn delete(
         &self,

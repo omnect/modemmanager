@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Messaging",
     assume_defaults = true
 )]
-trait Messaging {
+pub trait Messaging {
     /// Create method
     fn create(
         &self,

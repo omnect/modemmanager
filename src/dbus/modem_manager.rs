@@ -3,7 +3,7 @@
 use zbus::proxy;
 
 #[proxy(interface = "org.freedesktop.ModemManager1", assume_defaults = true)]
-trait ModemManager1 {
+pub trait ModemManager1 {
     /// InhibitDevice method
     fn inhibit_device(&self, uid: &str, inhibit: bool) -> zbus::Result<()>;
 

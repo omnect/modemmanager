@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Sar",
     assume_defaults = true
 )]
-trait Sar {
+pub trait Sar {
     /// Enable method
     fn enable(&self, enable: bool) -> zbus::Result<()>;
 

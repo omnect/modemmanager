@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Oma",
     assume_defaults = true
 )]
-trait Oma {
+pub trait Oma {
     /// AcceptNetworkInitiatedSession method
     fn accept_network_initiated_session(&self, session_id: u32, accept: bool) -> zbus::Result<()>;
 

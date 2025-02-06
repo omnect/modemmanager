@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Sim",
     assume_defaults = true
 )]
-trait Sim {
+pub trait Sim {
     /// ChangePin method
     fn change_pin(&self, old_pin: &str, new_pin: &str) -> zbus::Result<()>;
 

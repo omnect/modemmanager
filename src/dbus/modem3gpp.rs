@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Modem3gpp",
     assume_defaults = true
 )]
-trait Modem3gpp {
+pub trait Modem3gpp {
     /// DisableFacilityLock method
     fn disable_facility_lock(&self, properties: &(u32, &str)) -> zbus::Result<()>;
 

@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Voice",
     assume_defaults = true
 )]
-trait Voice {
+pub trait Voice {
     /// CallWaitingQuery method
     fn call_waiting_query(&self) -> zbus::Result<bool>;
 

@@ -6,7 +6,7 @@ use zbus::proxy;
     interface = "org.freedesktop.ModemManager1.Modem.Modem3gpp.Ussd",
     assume_defaults = true
 )]
-trait Ussd {
+pub trait Ussd {
     /// Cancel method
     fn cancel(&self) -> zbus::Result<()>;
 
