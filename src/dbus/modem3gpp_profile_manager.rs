@@ -10,19 +10,17 @@ pub trait ProfileManager {
     /// Delete method
     fn delete(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// List method
-    fn list(
-        &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    fn list(&self) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// Set method
     fn set(
         &self,
-        requested_properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+        requested_properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Updated signal
     #[zbus(signal)]

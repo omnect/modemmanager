@@ -8,9 +8,7 @@ use zbus::proxy;
 )]
 pub trait Location {
     /// GetLocation method
-    fn get_location(
-        &self,
-    ) -> zbus::Result<std::collections::HashMap<u32, zbus::zvariant::OwnedValue>>;
+    fn get_location(&self) -> zbus::Result<std::collections::HashMap<u32, zbus::OwnedVariant>>;
 
     /// InjectAssistanceData method
     fn inject_assistance_data(&self, data: &[u8]) -> zbus::Result<()>;
@@ -42,7 +40,7 @@ pub trait Location {
 
     /// Location property
     #[zbus(property)]
-    fn location(&self) -> zbus::Result<std::collections::HashMap<u32, zbus::zvariant::OwnedValue>>;
+    fn location(&self) -> zbus::Result<std::collections::HashMap<u32, zbus::OwnedVariant>>;
 
     /// SignalsLocation property
     #[zbus(property)]

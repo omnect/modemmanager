@@ -18,5 +18,5 @@ pub trait Time {
     #[zbus(property)]
     fn network_timezone(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 }

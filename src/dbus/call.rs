@@ -38,9 +38,7 @@ pub trait Call {
 
     /// AudioFormat property
     #[zbus(property)]
-    fn audio_format(
-        &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn audio_format(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// AudioPort property
     #[zbus(property)]

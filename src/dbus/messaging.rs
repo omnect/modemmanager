@@ -10,22 +10,22 @@ pub trait Messaging {
     /// Create method
     fn create(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
+    ) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Delete method
-    fn delete(&self, path: &zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn delete(&self, path: &zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// List method
-    fn list(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn list(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Added signal
     #[zbus(signal)]
-    fn added(&self, path: zbus::zvariant::ObjectPath<'_>, received: bool) -> zbus::Result<()>;
+    fn added(&self, path: zbus::ObjectPath<'_>, received: bool) -> zbus::Result<()>;
 
     /// Deleted signal
     #[zbus(signal)]
-    fn deleted(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn deleted(&self, path: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// DefaultStorage property
     #[zbus(property)]
@@ -33,7 +33,7 @@ pub trait Messaging {
 
     /// Messages property
     #[zbus(property)]
-    fn messages(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn messages(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// SupportedStorages property
     #[zbus(property)]

@@ -10,7 +10,7 @@ pub trait ModemManager1 {
     /// ReportKernelEvent method
     fn report_kernel_event(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// ScanDevices method

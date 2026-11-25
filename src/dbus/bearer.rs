@@ -16,7 +16,7 @@ use modemmanager_sys::{
 };
 
 use zbus::proxy;
-use zbus::zvariant::{Dict, OwnedValue};
+use zbus::{Dict, OwnedVariant};
 
 use num::FromPrimitive;
 
@@ -33,10 +33,10 @@ pub struct Stats {
 
 // we can't use derive DeserializeDict with optional members:
 // https://github.com/dbus2/zbus/issues/311, manually implement TryFrom
-impl TryFrom<OwnedValue> for Stats {
+impl TryFrom<OwnedVariant> for Stats {
     type Error = zbus::Error;
 
-    fn try_from(value: OwnedValue) -> Result<Self, Self::Error> {
+    fn try_from(value: OwnedVariant) -> Result<Self, Self::Error> {
         let values_dict: Dict<'_, '_> = value.try_into()?;
 
         let rx_bytes = values_dict.get(&"rx-bytes")?;
@@ -242,10 +242,10 @@ pub enum Properties {
     Prop3Gpp2(Prop3Gpp2),
 }
 
-impl TryFrom<OwnedValue> for Properties {
+impl TryFrom<OwnedVariant> for Properties {
     type Error = zbus::Error;
 
-    fn try_from(value: OwnedValue) -> Result<Self, Self::Error> {
+    fn try_from(value: OwnedVariant) -> Result<Self, Self::Error> {
         let values_dict: Dict = value.try_into()?;
 
         let apn: Result<Option<&str>, _> = values_dict.get(&"apn");
@@ -270,10 +270,10 @@ pub struct IpConfig<IpAddrType> {
 }
 
 // manually implement TryFrom
-impl<AddrType: FromStr> TryFrom<OwnedValue> for IpConfig<AddrType> {
+impl<AddrType: FromStr> TryFrom<OwnedVariant> for IpConfig<AddrType> {
     type Error = zbus::Error;
 
-    fn try_from(value: OwnedValue) -> Result<Self, Self::Error> {
+    fn try_from(value: OwnedVariant) -> Result<Self, Self::Error> {
         let values_dict: Dict<'_, '_> = value.try_into()?;
 
         let method: u32 = values_dict
@@ -324,7 +324,7 @@ pub type Ipv6Config = IpConfig<Ipv6Addr>;
     interface = "org.freedesktop.ModemManager1.Bearer",
     assume_defaults = true
 )]
-pub  trait Bearer {
+pub trait Bearer {
     /// Connect method
     fn connect(&self) -> zbus::Result<()>;
 
@@ -351,13 +351,13 @@ pub  trait Bearer {
     #[zbus(property)]
     fn ip4_config(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedVariant>>;
 
     /// Ip6Config property
     #[zbus(property)]
     fn ip6_config(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedVariant>>;
 
     /// IpTimeout property
     #[zbus(property)]
@@ -375,7 +375,7 @@ pub  trait Bearer {
     #[zbus(property)]
     fn properties(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedVariant>>;
 
     /// ReloadStatsSupported property
     #[zbus(property)]
@@ -383,7 +383,9 @@ pub  trait Bearer {
 
     /// Stats property
     #[zbus(property)]
-    fn stats(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn stats(
+        &self,
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedVariant>>;
 
     /// Suspended property
     #[zbus(property)]

@@ -13,7 +13,7 @@ pub trait ModemCdma {
     /// ActivateManual method
     fn activate_manual(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// ActivationStateChanged signal
@@ -22,7 +22,7 @@ pub trait ModemCdma {
         &self,
         activation_state: u32,
         activation_error: u32,
-        status_changes: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        status_changes: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// ActivationState property
