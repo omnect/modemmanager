@@ -13,12 +13,12 @@ pub trait Signal {
     /// SetupThresholds method
     fn setup_thresholds(
         &self,
-        settings: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        settings: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// Cdma property
     #[zbus(property)]
-    fn cdma(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn cdma(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// ErrorRateThreshold property
     #[zbus(property)]
@@ -26,19 +26,19 @@ pub trait Signal {
 
     /// Evdo property
     #[zbus(property)]
-    fn evdo(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn evdo(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Gsm property
     #[zbus(property)]
-    fn gsm(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn gsm(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Lte property
     #[zbus(property)]
-    fn lte(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn lte(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Nr5g property
     #[zbus(property)]
-    fn nr5g(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn nr5g(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Rate property
     #[zbus(property)]
@@ -50,5 +50,5 @@ pub trait Signal {
 
     /// Umts property
     #[zbus(property)]
-    fn umts(&self) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    fn umts(&self) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 }

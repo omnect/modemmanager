@@ -75,5 +75,5 @@ pub trait Sms {
 
     /// Validity property
     #[zbus(property)]
-    fn validity(&self) -> zbus::Result<zbus::zvariant::OwnedValue>;
+    fn validity(&self) -> zbus::Result<zbus::OwnedVariant>;
 }

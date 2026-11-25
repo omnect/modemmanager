@@ -16,11 +16,11 @@ pub trait Voice {
     /// CreateCall method
     fn create_call(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
+    ) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// DeleteCall method
-    fn delete_call(&self, path: &zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn delete_call(&self, path: &zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// HangupAll method
     fn hangup_all(&self) -> zbus::Result<()>;
@@ -32,22 +32,22 @@ pub trait Voice {
     fn hold_and_accept(&self) -> zbus::Result<()>;
 
     /// ListCalls method
-    fn list_calls(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn list_calls(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Transfer method
     fn transfer(&self) -> zbus::Result<()>;
 
     /// CallAdded signal
     #[zbus(signal)]
-    fn call_added(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn call_added(&self, path: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// CallDeleted signal
     #[zbus(signal)]
-    fn call_deleted(&self, path: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn call_deleted(&self, path: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// Calls property
     #[zbus(property)]
-    fn calls(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn calls(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// EmergencyOnly property
     #[zbus(property)]

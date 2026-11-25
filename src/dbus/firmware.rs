@@ -12,7 +12,7 @@ pub trait Firmware {
         &self,
     ) -> zbus::Result<(
         String,
-        Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>,
+        Vec<std::collections::HashMap<String, zbus::OwnedVariant>>,
     )>;
 
     /// Select method
@@ -22,8 +22,5 @@ pub trait Firmware {
     #[zbus(property)]
     fn update_settings(
         &self,
-    ) -> zbus::Result<(
-        u32,
-        std::collections::HashMap<String, zbus::zvariant::OwnedValue>,
-    )>;
+    ) -> zbus::Result<(u32, std::collections::HashMap<String, zbus::OwnedVariant>)>;
 }

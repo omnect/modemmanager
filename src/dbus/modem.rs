@@ -19,11 +19,11 @@ pub trait Modem {
     /// CreateBearer method
     fn create_bearer(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
+    ) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// DeleteBearer method
-    fn delete_bearer(&self, bearer: &zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn delete_bearer(&self, bearer: &zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// Enable method
     fn enable(&self, enable: bool) -> zbus::Result<()>;
@@ -34,10 +34,10 @@ pub trait Modem {
     /// GetCellInfo method
     fn get_cell_info(
         &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// ListBearers method
-    fn list_bearers(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn list_bearers(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Reset method
     fn reset(&self) -> zbus::Result<()>;
@@ -72,7 +72,7 @@ pub trait Modem {
 
     /// Bearers property
     #[zbus(property)]
-    fn bearers(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn bearers(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// CarrierConfiguration property
     #[zbus(property)]
@@ -172,11 +172,11 @@ pub trait Modem {
 
     /// Sim property
     #[zbus(property)]
-    fn sim(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn sim(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// SimSlots property
     #[zbus(property)]
-    fn sim_slots(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn sim_slots(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// State property
     #[zbus(property)]

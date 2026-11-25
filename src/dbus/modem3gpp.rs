@@ -14,9 +14,7 @@ pub trait Modem3gpp {
     fn register(&self, operator_id: &str) -> zbus::Result<()>;
 
     /// Scan method
-    fn scan(
-        &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    fn scan(&self) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// SetCarrierLock method
     fn set_carrier_lock(&self, data: &[u8]) -> zbus::Result<()>;
@@ -27,13 +25,13 @@ pub trait Modem3gpp {
     /// SetInitialEpsBearerSettings method
     fn set_initial_eps_bearer_settings(
         &self,
-        settings: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        settings: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// SetNr5gRegistrationSettings method
     fn set_nr5g_registration_settings(
         &self,
-        properties: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        properties: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// SetPacketServiceState method
@@ -53,19 +51,19 @@ pub trait Modem3gpp {
 
     /// InitialEpsBearer property
     #[zbus(property)]
-    fn initial_eps_bearer(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn initial_eps_bearer(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// InitialEpsBearerSettings property
     #[zbus(property)]
     fn initial_eps_bearer_settings(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// Nr5gRegistrationSettings property
     #[zbus(property)]
     fn nr5g_registration_settings(
         &self,
-    ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
+    ) -> zbus::Result<std::collections::HashMap<String, zbus::OwnedVariant>>;
 
     /// OperatorCode property
     #[zbus(property)]
